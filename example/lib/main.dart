@@ -43,6 +43,7 @@ class _MyAppState extends State<MyApp> {
       _sharedFiles.addAll(value.where((f) => f.type != SharedMediaType.text));
       var textFile = value.firstWhere(
         (f) => f.type == SharedMediaType.text,
+        orElse: () => SharedMediaFile(path: '', type: SharedMediaType.text),
       );
       if (textFile.path.isNotEmpty) {
         _sharedText = textFile.path;
@@ -73,6 +74,10 @@ class _MyAppState extends State<MyApp> {
             leading: IconButton(
               icon: const Icon(Icons.close, color: Colors.white),
               onPressed: () {
+                setState(() {
+                  _sharedFiles.clear();
+                  _sharedText = null;
+                });
                 ReceiveSharingIntent.instance.reset();
                 // In a real app, you'd likely pop the navigator.
                 // For this example, we do nothing.
