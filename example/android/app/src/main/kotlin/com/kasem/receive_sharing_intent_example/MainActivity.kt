@@ -1,4 +1,4 @@
-package com.kasem.receive_sharing_intent_example
+package com.example.twittershare
 
 import io.flutter.embedding.android.FlutterActivity
 
